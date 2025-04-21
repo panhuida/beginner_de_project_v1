@@ -1,0 +1,114 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"CoinCap Exchange Dashboard\"\n",
+        "author: \"StartDataEngineering\"\n",
+        "format: dashboard\n",
+        "---\n",
+        "\n",
+        "\n",
+        "## Row {height=70%}\n"
+      ],
+      "id": "afbd19ab"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "title": "User Behaviour Metrics data analysis"
+      },
+      "source": [
+        "import pandas as pd\n",
+        "import plotly.express as px\n",
+        "import os\n",
+        "# Load the CSV file\n",
+        "file_path = '/opt/code/dp/beginner_de_project_local/data/behaviour_metrics.csv'\n",
+        "\n",
+        "import duckdb as d\n",
+        "d.sql(f\"create table bm as SELECT * FROM '{file_path}'\")\n",
+        "\n",
+        "# Query for average spending per customer\n",
+        "avg_spent_query = \"SELECT AVG(amount_spent) AS average_spent FROM bm;\"\n",
+        "average_spent = d.sql(avg_spent_query).fetchdf()\n",
+        "\n",
+        "# Plot for average spending\n",
+        "fig_avg_spent = px.bar(average_spent, x=['Average Spending'], y='average_spent', title='Average Spending per Customer')\n",
+        "fig_avg_spent.show()"
+      ],
+      "id": "366b1ec1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Row {height=30%}\n"
+      ],
+      "id": "e535cc6a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "title": "User Behaviour Metrics data analysis"
+      },
+      "source": [
+        "import pandas as pd\n",
+        "import plotly.express as px\n",
+        "import os\n",
+        "# Load the CSV file\n",
+        "file_path = f'/opt/code/dp/beginner_de_project_local/data/behaviour_metrics.csv'\n",
+        "\n",
+        "import duckdb as d\n",
+        "d.sql(f\"create table bm2 as SELECT * FROM '{file_path}'\")\n",
+        "\n",
+        "# Query for spending distribution\n",
+        "spending_dist_query = \"\"\"\n",
+        "WITH binned_data AS (\n",
+        "    SELECT \n",
+        "        amount_spent,\n",
+        "        CASE \n",
+        "            WHEN amount_spent < 10000 THEN '0-9999'\n",
+        "            WHEN amount_spent >= 10000 AND amount_spent < 20000 THEN '10000-19999'\n",
+        "            WHEN amount_spent >= 20000 AND amount_spent < 30000 THEN '20000-29999'\n",
+        "            WHEN amount_spent >= 30000 AND amount_spent < 40000 THEN '30000-39999'\n",
+        "            WHEN amount_spent >= 40000 AND amount_spent < 50000 THEN '40000-49999'\n",
+        "            WHEN amount_spent >= 50000 AND amount_spent < 60000 THEN '50000-59999'\n",
+        "            WHEN amount_spent >= 60000 AND amount_spent < 70000 THEN '60000-69999'\n",
+        "            WHEN amount_spent >= 70000 AND amount_spent < 80000 THEN '70000-79999'\n",
+        "            WHEN amount_spent >= 80000 AND amount_spent < 90000 THEN '80000-89999'\n",
+        "            ELSE '90000+'\n",
+        "        END AS spending_bin\n",
+        "    FROM bm2\n",
+        ")\n",
+        "SELECT \n",
+        "    spending_bin,\n",
+        "    COUNT(*) AS count\n",
+        "FROM binned_data\n",
+        "GROUP BY spending_bin\n",
+        "ORDER BY spending_bin;\n",
+        "\"\"\"\n",
+        "spending_distribution = d.sql(spending_dist_query).fetchdf()\n",
+        "\n",
+        "# Plot for spending distribution\n",
+        "fig_spending_dist = px.bar(spending_distribution, x='spending_bin', y='count', title='Spending Distribution')\n",
+        "fig_spending_dist.show()"
+      ],
+      "id": "142ce8a2",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3",
+      "language": "python",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
