@@ -211,13 +211,13 @@ D select * from behaviour_metrics limit 5;
 
 3.安装 Airflow 扩展包时，注意版本兼容性，按约束文件的版本安装。
 
-4.安装 Spark 的 jar包时，注意版本兼容性。
+4.下载 Spark 的 jar包时，注意版本兼容性。
 
 5.对 “DuckDB 是大数据浏览器” 这句话有点理解了，在这个练习中，DuckDB 直接读取 csv 数据文件和 parquet 数据文件并合并再保存写入（还有直接连接MySQL、PostgreSQL查询或导入数据等）。
 
 
 
-**06 附录**
+#### **06 附录**
 
 ##### 1.Superset 连接 DuckDB
 
