@@ -36,7 +36,7 @@ https://github.com/panhuida/beginner_de_project_v1
 
 ##### **1.整体的架构及数据流图**
 
-![image-20250422143330173](Data Engineering Project for Beginners.assets/image-20250422143330173.png)
+![image-20250422143330173](assets/images/image-20250422143330173.png)
 
 主要组件：
 
@@ -50,7 +50,7 @@ https://github.com/panhuida/beginner_de_project_v1
 
 ##### **2.Airflow DAG执行示例**
 
-![image-20250422120349099](Data Engineering Project for Beginners.assets/image-20250422120349099.png)
+![image-20250422120349099](assets/images/image-20250422120349099.png)
 
 
 
@@ -153,13 +153,13 @@ region=us-east-1
 
 https://claude.ai/chat/cf762bda-ec68-4af0-b086-31d7e30a711c
 
-![image-20250421111457211](Data Engineering Project for Beginners.assets/image-20250421111457211.png)
+![image-20250421111457211](assets/images/image-20250421111457211.png)
 
 
 
 - 在界面增加连接 spark-conn
 
-![image-20250421111513101](Data Engineering Project for Beginners.assets/image-20250421111513101.png)
+![image-20250421111513101](assets/images/image-20250421111513101.png)
 
 
 
@@ -234,5 +234,5 @@ pan@pan-SER8:/opt/superset$ source bin/activate
 duckdb:////data/duckdb/demo.duckdb
 ```
 
-![image-20250422153116160](Data Engineering Project for Beginners.assets/image-20250422153116160.png)
+![image-20250422153116160](assets/images/image-20250422153116160.png)
 
